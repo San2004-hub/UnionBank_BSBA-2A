@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rizal Commercial Banking Corporation (RCBC)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Vibrant primary color scheme */
+            --primary-color: #005792;
+            --primary-light: #0083d6;
+            --primary-dark: #00365a;
+            --secondary-color: #fd7e14;
+            --secondary-light: #ff9642;
+            --secondary-dark: #e26a00;
+            
+            /* Accent colors */
+            --accent-color-1: #2ec4b6;
+            --accent-color-2: #e84855;
+            --accent-color-3: #9b5de5;
+            --accent-color-4: #00bbf9;
+            
+            /* Text and background colors */
+            --text-color: #2d3748;
+            --text-light: #718096;
+            --bg-color: #f8fafc;
+            --card-color: #ffffff;
+            
+            /* UI elements */
+            --border-radius: 12px;
+            --card-border-radius: 16px;
+            --box-shadow: 0 10px 20px rgba(0, 87, 146, 0.08);
+            --card-shadow: 0 15px 30px rgba(0, 87, 146, 0.1);
+            --hover-shadow: 0 20px 40px rgba(0, 87, 146, 0.15);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --content-padding: 35px;
+            
+            /* Gradients */
+            --primary-gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color-4));
+            --secondary-gradient: linear-gradient(135deg, var(--secondary-color), #ffbe0b);
+            --card-gradient-1: linear-gradient(135deg, #f8f9fa, #ffffff);
+            --card-gradient-2: linear-gradient(135deg, #f1f5f9, #ffffff);
+            --header-gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color-4));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            display: flex;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(#e6f3fe 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+        
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            background: var(--primary-gradient);
+            color: white;
+            position: fixed;
+            overflow-y: auto;
+            padding-bottom: 50px;
+            z-index: 1000;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+        
+        .logo-container {
+            padding: 25px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+        }
+        
+        .logo-container img {
+            max-width: 80%;
+            height: auto;
+            transition: var(--transition);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-container img:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+        }
+        
+        .menu {
+            padding: 0;
+            list-style-type: none;
+            margin-top: 20px;
+        }
+        
+        .menu li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .menu li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--secondary-color), transparent);
+            opacity: 0.5;
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .menu li:hover:before {
+            width: 100%;
+        }
+        
+        .menu li:hover {
+            transform: translateX(5px);
+        }
+        
+        .menu a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            display: block;
+            padding: 15px 25px;
+            width: 100%;
+            font-weight: 400;
+            transition: var(--transition);
+            font-size: 15px;
+        }
+        
+        .menu a:hover {
+            color: white;
+        }
+        
+        .menu a i {
+            margin-right: 10px;
+            font-size: 16px;
+            color: var(--secondary-color);
+        }
+        
+        .content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto 0 280px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            background-color: var(--card-color);
+            padding: 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s forwards;
+            overflow: hidden;
+            position: relative;
+            border-top: 5px solid transparent;
+            border-image: var(--primary-gradient);
+            border-image-slice: 1;
+        }
+        
+        .section-header {
+            background: var(--header-gradient);
+            padding: 25px var(--content-padding);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-header:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="rgba(255,255,255,0.1)" width="50" height="50" x="0" y="0"/><rect fill="rgba(255,255,255,0.1)" width="50" height="50" x="50" y="50"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .section-header h1 {
+            color: white;
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-header h1::after {
+            display: none;
+        }
+        
+        .section-content {
+            padding: var(--content-padding);
+            background: var(--card-gradient-1);
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section:hover {
+            box-shadow: var(--hover-shadow);
+            transform: translateY(-5px);
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        h1 {
+            font-size: 28px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-top: 30px;
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin-top: 25px;
+            color: var(--primary-light);
+        }
+        
+        h4 {
+            font-size: 18px;
+            color: var(--secondary-color);
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        
+        p, li {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        a:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        
+        a:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+            text-decoration: none;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        table, th, td {
+            border: none;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        
+        th {
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        tr {
+            transition: var(--transition);
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        tr:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+        
+        .profile-card {
+            display: flex;
+            margin-bottom: 25px;
+            padding: 25px;
+            border: none;
+            border-radius: var(--card-border-radius);
+            background-color: var(--card-gradient-2);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .profile-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0.8;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .profile-image {
+            width: 120px;
+            height: 140px;
+            margin-right: 25px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-image:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            z-index: 2;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .profile-card:hover .profile-image img {
+            transform: scale(1.08);
+        }
+        
+        .profile-details {
+            flex: 1;
+        }
+        
+        .profile-name {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .profile-position {
+            font-style: italic;
+            margin-bottom: 12px;
+            color: var(--text-light);
+            font-size: 15px;
+        }
+        
+        .tag-line {
+            font-style: italic;
+            color: var(--text-light);
+            margin-top: -10px;
+            margin-bottom: 25px;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
+        
+        .org-chart {
+            width: 100%;
+            max-width: 900px;
+            margin: 25px auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .org-chart:hover {
+            transform: scale(1.02);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .csr-item, .award-item {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+        
+        .csr-item:hover, .award-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-left-color: var(--secondary-color);
+        }
+        
+        .csr-title, .award-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .award-year {
+            font-weight: 500;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+        
+        #company-name {
+            text-align: center;
+            padding: 120px 40px;
+            background-image: linear-gradient(135deg, rgba(0, 87, 146, 0.85) 0%, rgba(0, 87, 146, 0.7) 100%), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIprbE_qvEUrlb6b0TYa2JRC38f0aT5QJ0ag&s');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            border-bottom: 3px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+        
+        #company-name h1 {
+            font-size: 44px;
+            margin-bottom: 20px;
+            border-bottom: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tag-line {
+            font-size: 22px;
+            color: white;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        #company-name .btn {
+            margin-top: 15px;
+            padding: 15px 35px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0 5px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        #company-name:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle fill="rgba(0,87,146,0.05)" cx="10" cy="10" r="2"/></svg>');
+            opacity: 0.5;
+        }
+        
+        #company-name h1::after {
+            display: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            margin-top: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 87, 146, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .btn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition);
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(253, 126, 20, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .btn:hover:after {
+            display: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-gradient);
+            color: white;
+        }
+        
+        ol {
+            padding-left: 20px;
+        }
+        
+        ol li {
+            margin-bottom: 10px;
+        }
+        
+        #disclaimer {
+            background-color: #fff8e6;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        #references {
+            background-color: #f0f8ff;
+        }
+        
+        /* Card grid system */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .card {
+            background: var(--card-gradient-1);
+            border-radius: var(--card-border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            transform: translateZ(0);
+        }
+        
+        .card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 70%, rgba(0, 87, 146, 0.05));
+            z-index: 0;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 15px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="rgba(255,255,255,0.1)" width="50" height="50" x="0" y="0"/><rect fill="rgba(255,255,255,0.1)" width="50" height="50" x="50" y="50"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .card-header h3 {
+            color: white;
+            margin: 0;
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-body {
+            padding: 20px;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-footer {
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Add responsive design */
+        @media (max-width: 1200px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .section-content {
+                padding: 25px;
+            }
+            
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 240px;
+            }
+            
+            .content {
+                margin-left: 240px;
+            }
+            
+            .profile-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .profile-image {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding-bottom: 0;
+            }
+            
+            .content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            
+            body {
+                flex-direction: column;
+            }
+            
+            .menu {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .menu li {
+                width: 50%;
+                border-bottom: none;
+            }
+            
+            .menu a {
+                padding: 10px;
+                text-align: center;
+                font-size: 14px;
+            }
+            
+            .menu a i {
+                display: block;
+                margin: 0 auto 5px;
+                font-size: 18px;
+            }
+            
+            .section {
+                padding: 0;
+                margin-bottom: 25px;
+            }
+            
+            .section-content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .menu li {
+                width: 100%;
+            }
+            
+            .content {
+                padding: 10px;
+            }
+            
+            .section-content {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .profile-card {
+                padding: 15px;
+            }
+        }
+        
+        /* Loading animation for sections */
+        .section {
+            animation-delay: calc(0.2s * var(--i));
+        }
+        
+        /* Subtle background animation */
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Badge styles */
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+        
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .badge-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+        }
+        
+        .badge-secondary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));
+            color: white;
+        }
+        
+        .badge-success {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+        }
+        
+        .badge-info {
+            background: linear-gradient(135deg, var(--accent-color-4), var(--accent-color-1));
+            color: white;
+        }
+        
+        /* Decorative elements */
+        .decorative-line {
+            height: 3px;
+            width: 50px;
+            background: var(--primary-gradient);
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        
+        /* Enhanced list styling */
+        .styled-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .styled-list li {
+            padding-left: 28px;
+            position: relative;
+            margin-bottom: 12px;
+        }
+        
+        .styled-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar/Menu -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/RCBC_logo.svg" alt="RCBC Logo">
+        </div>
+        <ul class="menu">
+            <li><a href="#company-name"><i class="fas fa-building"></i> Company Overview</a></li>
+            <li><a href="#background"><i class="fas fa-history"></i> Background & History</a></li>
+            <li><a href="#corporate-profile"><i class="fas fa-id-card"></i> Corporate Profile</a></li>
+            <li><a href="#vision-mission"><i class="fas fa-bullseye"></i> Vision & Mission</a></li>
+            <li><a href="#branches"><i class="fas fa-map-marker-alt"></i> Branches & Offices</a></li>
+            <li><a href="#business-scope"><i class="fas fa-briefcase"></i> Scope of Business</a></li>
+            <li><a href="#products-services"><i class="fas fa-cubes"></i> Products & Services</a></li>
+            <li><a href="#financial-highlights"><i class="fas fa-chart-line"></i> Financial Highlights</a></li>
+            <li><a href="#awards"><i class="fas fa-trophy"></i> Awards & Recognitions</a></li>
+            <li><a href="#org-structure"><i class="fas fa-sitemap"></i> Organizational Structure</a></li>
+            <li><a href="#board"><i class="fas fa-users"></i> Board of Directors</a></li>
+            <li><a href="#management"><i class="fas fa-user-tie"></i> Management Committee</a></li>
+            <li><a href="#capital-structure"><i class="fas fa-coins"></i> Capital Structure</a></li>
+            <li><a href="#corporate-governance"><i class="fas fa-balance-scale"></i> Corporate Governance</a></li>
+            <li><a href="#csr"><i class="fas fa-hands-helping"></i> CSR</a></li>
+            <li><a href="#financial-statements"><i class="fas fa-file-invoice-dollar"></i> Financial Statements</a></li>
+            <li><a href="#team"><i class="fas fa-user-friends"></i> Team</a></li>
+            <li><a href="#references"><i class="fas fa-book"></i> References</a></li>
+            <li><a href="#disclaimer"><i class="fas fa-exclamation-circle"></i> Disclaimer</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Company Name -->
+        <div id="company-name" class="section" style="--i: 1">
+            <div class="hero-content">
+                <span class="hero-badge">Established 1960</span>
+                <span class="hero-badge">Leading Universal Bank</span>
+                <h1>Rizal Commercial Banking Corporation</h1>
+                <p class="tag-line">Empowering Generations of Filipinos Through Financial Innovation</p>
+                <p class="hero-subtitle">Building meaningful relationships while providing cutting-edge solutions for businesses and individuals across the Philippines since 1960.</p>
+                <a href="#background" class="btn">Explore Our Story</a>
+            </div>
+        </div>
+
+        <!-- Background -->
+        <div id="background" class="section" style="--i: 2">
+            <div class="section-header">
+                <h1>Background & History</h1>
+            </div>
+            <div class="section-content">
+                <p>Rizal Commercial Banking Corporation (RCBC) was established on September 23, 1960, as Rizal Development Bank, a small development bank in Rizal province. In 1963, it received approval from the Bangko Sentral ng Pilipinas to operate as a commercial bank and began operations under its present name, Rizal Commercial Banking Corporation.</p>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Founding Era (1960s)</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>RCBC established its first head office at 219 Buendia Avenue in Makati (then part of Rizal), making it the first commercial bank to do so in the province. The bank was acquired by members of the Yuchengco Group of Companies (YGC) in 1962.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Growth & Expansion (1980s-2000s)</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>In 1989, RCBC received its universal banking license. Through the years, it grew through strategic acquisitions and organic growth. In 2000, it acquired major control of Bankard Inc., a credit card company. In 2007, RCBC acquired Merchants Savings and Loan Association Inc., consolidating it with RCBC Savings Bank to increase its branch network.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Modern Era (2010s-Present)</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>In 2019, the Bangko Sentral ng Pilipinas approved RCBC's merger with its thrift bank RCBC Savings Bank. Today, RCBC is the 5th largest privately owned universal bank in the Philippines, with over ₱1.3 trillion in total resources as of June 2024.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Head Office Address</h3>
+                <p>
+                    <i class="fas fa-map-marker-alt"></i> Yuchengco Tower<br>
+                    RCBC Plaza, 6819 Ayala Avenue<br>
+                    Makati City 0727<br>
+                    Philippines
+                </p>
+                
+                <div class="promo-cta">
+                    <h3>Special Offers</h3>
+                    <a href="https://rcbccredit.com/promos/wgmccb?utm_source=googleads&utm_medium=0813002000036&utm_campaign=pmaxgift25&utm_content=JCB+Uniqlo2&gad_source=1&gad_campaignid=21865621561&gbraid=0AAAAACrgdfFlQGDEWBrnK_zgSj8jBkqbI&gclid=CjwKCAjwq7fABhB2EiwAwk-YbMsmo7i9P8GGMH5WugejM5RV57w8yuQ7DavY9s3aQ_2yZQvXaPf1xBoCUVYQAvD_BwE" class="btn promo-btn" target="_blank">
+                        <i class="fas fa-gift"></i> Official Website
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Corporate Profile -->
+        <div id="corporate-profile" class="section" style="--i: 3">
+            <div class="section-header">
+                <h1>Corporate Profile</h1>
+            </div>
+            <div class="section-content">
+                <p>Rizal Commercial Banking Corporation (RCBC) is one of the leading universal banks in the Philippines with total consolidated resources of over ₱1.3 trillion (as of June 30, 2024). It is majority-owned by the Yuchengco Group of Companies (YGC), one of the oldest and largest conglomerates in Southeast Asia.</p>
+                <p>Other significant investors of the bank include the World Bank's International Finance Corporation, Cathay Life Insurance Co., Ltd., a wholly owned subsidiary of Cathay Financial Holding, Ltd., and Sumitomo Mitsui Banking Corporation (SMBC).</p>
+                
+                <h3>RCBC Subsidiaries</h3>
+                <ul>
+                    <li><strong>RCBC Capital Corporation</strong> - Investment banking arm</li>
+                    <li><strong>RCBC Securities, Inc.</strong> - Stock brokerage</li>
+                    <li><strong>RCBC Bankard Services Corporation</strong> - Credit card services</li>
+                    <li><strong>RCBC Forex Brokers Corporation</strong> - Foreign exchange brokerage</li>
+                    <li><strong>RCBC International Finance Limited</strong> - International finance</li>
+                    <li><strong>Rizal Microbank, Inc.</strong> - Microfinance operations</li>
+                    <li><strong>RCBC Leasing and Finance Corporation</strong> - Leasing and financing</li>
+                    <li><strong>Niyog Property Holdings, Inc.</strong> - Real estate</li>
+                </ul>
+             <div class="promo-cta">
+                <h3>Source:</h3>
+                <a href="https://www.rcbc.com/" class="btn promo-btn" target="_blank">
+                    <i class="fas fa-gift"></i> Official Website
+                </a>
+            </div> 
+        </div>
+          
+        </div>
+
+        <!-- Vision, Mission, Values -->
+        <div id="vision-mission" class="section" style="--i: 4">
+            <div class="section-header">
+                <h1>Vision, Mission, and Core Values</h1>
+            </div>
+            <div class="section-content">
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Mission</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Empowering generations of Filipinos through financial innovation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Vision</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>We are committed to building meaningful relationships while providing cutting-edge solutions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Core Values (CLIENT)</h3>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>C</h3>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Customer Obsession</strong> - We prioritize our customers in all decisions and actions, ensuring that our services meet their diverse needs.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>L</h3>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Loyalty</strong> - We pursue corporate interests as our own, speaking well of the company and taking pride in its achievements.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>I</h3>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Integrity</strong> - We uphold the highest standards of discipline, accountability, and ethical conduct in all interactions, building trust with customers and stakeholders.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>E</h3>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Excellence</strong> - We strive to be great, deliver quality results promptly, and improve our results continuously.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>N</h3>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Nurturing</strong> - We are responsible stewards of our environment and communities, encouraging social development and sustainability.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>T</h3>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Teamwork</strong> - We collaborate toward our shared goals and tap areas of synergy actively to deliver the best possible outcomes for the customers and communities we serve.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="promo-cta">
+                    <h3>Source:</h3>
+                    <a href="https://www.rcbc.com/" class="btn promo-btn" target="_blank">
+                        <i class="fas fa-gift"></i> Official Website
+                    </a>
+                </div> 
+            </div>
+        </div>
+
+        <!-- Branches -->
+        <div id="branches" class="section" style="--i: 5">
+            <h1>Branches and Offices</h1>
+            <p>RCBC has an extensive network of delivery channels to better serve its growing customer base. As of December 31, 2024, it has:</p>
+            <ul>
+                <li>465 branches nationwide</li>
+                <li>1,482 ATMs</li>
+                <li>8,426 ATM Go terminals with presence across all 82 provinces of the country</li>
+            </ul>
+            <p>This network is complemented by RCBC's digital channels including Internet banking and mobile banking applications for both iOS and Android platforms.</p>
+            <p>For a full list of branches and ATM locations, you can visit the <a href="https://www.rcbc.com/branch-atm-finder" target="_blank">RCBC Branch & ATM Finder</a> on the official website.</p>
+        </div>
+
+        <!-- Scope of Business -->
+        <div id="business-scope" class="section" style="--i: 6">
+            <h1>Scope of Business/Operation</h1>
+            <p>As a universal bank, RCBC offers a wide range of banking and financial services to various customer segments:</p>
+            
+            <h3>Consumer Banking</h3>
+            <p>Providing retail banking products and services to individual customers, including savings and checking accounts, personal loans, mortgages, credit cards, and digital banking services.</p>
+            
+            <h3>Corporate Banking</h3>
+            <p>Offering specialized services to large corporations and business conglomerates, including corporate loans, cash management solutions, trade services, and investment banking.</p>
+            
+            <h3>Commercial Banking</h3>
+            <p>Serving medium-sized businesses with tailored financial solutions, including commercial loans, deposit products, and trade finance services.</p>
+            
+            <h3>SME Banking</h3>
+            <p>Providing financial services to small and medium enterprises through specialized lending programs, deposit products, and cash management services.</p>
+            
+            <h3>Microfinance</h3>
+            <p>Through Rizal Microbank, serving microenterprises and small business operators, as well as value chain players particularly in the agricultural sector.</p>
+            
+            <h3>Digital Banking</h3>
+            <p>Pioneering digital banking solutions like DiskarTech, RCBC's financial inclusion "super app," and other online banking platforms to provide convenient access to banking services.</p>
+            
+            <h3>Investment Banking</h3>
+            <p>Through RCBC Capital Corporation, providing services such as underwriting, project finance, and corporate financial advisory.</p>
+            
+            <h3>Treasury</h3>
+            <p>Managing the bank's liquidity and investment portfolio, and offering treasury products to clients including foreign exchange and fixed-income securities.</p>
+            <div class="promo-cta">
+                <h3>Source:</h3>
+                <a href="https://www.rcbc.com/" class="btn promo-btn" target="_blank">
+                    <i class="fas fa-gift"></i> Official Website
+                </a>
+            </div> 
+        </div>
+
+        <!-- Products and Services -->
+        <div id="products-services" class="section" style="--i: 7">
+            <div class="section-header">
+                <h1>Products and Services</h1>
+            </div>
+            <div class="section-content">
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Deposit Products</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Savings Accounts</li>
+                                <li>Checking Accounts</li>
+                                <li>Time Deposit</li>
+                                <li>Foreign Currency Accounts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Loan Products</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Home Loans</li>
+                                <li>Auto Loans</li>
+                                <li>Personal Loans</li>
+                                <li>Corporate Loans</li>
+                                <li>SME Loans</li>
+                                <li>Microfinance Loans</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Card Products</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>RCBC Credit Cards (VISA, Mastercard, JCB, and UnionPay)</li>
+                                <li>MyDebit Cards</li>
+                                <li>YGC Rewards Plus</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Investment Products</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Unit Investment Trust Funds (UITFs)</li>
+                                <li>Fixed Income Securities</li>
+                                <li>Corporate Trust</li>
+                                <li>Personal Trust</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Insurance Products</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Sun Life GREPA (Life Insurance)</li>
+                                <li>Malayan Insurance (Non-life Insurance)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Digital Banking Services</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>RCBC Pulz</li>
+                                <li>Online Account Opening</li>
+                                <li>RCBC Online Banking</li>
+                                <li>RCBC Mobile Banking</li>
+                                <li>DiskarTech Financial Super App</li>
+                                <li>ATM Go</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Remittance Services</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>TeleMoney</li>
+                                <li>Remittance Savings Account</li>
+                                <li>International Network Services</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Premium Banking</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Hexagon Club (Privilege, Priority, and Prestige)</li>
+                                <li>RCBC Wealth Management</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="promo-cta">
+                        <h3>Source:</h3>
+                        <a href="https://www.rcbc.com/" class="btn promo-btn" target="_blank">
+                            <i class="fas fa-gift"></i> Official Website
+                        </a>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Highlights -->
+        <div id="financial-highlights" class="section" style="--i: 8">
+            <div class="section-header">
+                <h1>Operational/Financial Highlights</h1>
+            </div>
+            <div class="section-content">
+                <h3>Key Financial Metrics (2023)</h3>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Total Assets</td>
+                        <td>₱1.24 trillion</td>
+                    </tr>
+                    <tr>
+                        <td>Net Income</td>
+                        <td>₱12.2 billion</td>
+                    </tr>
+                    <tr>
+                        <td>Number of Branches</td>
+                        <td>465</td>
+                    </tr>
+                    <tr>
+                        <td>Number of ATMs</td>
+                        <td>1,482</td>
+                    </tr>
+                    <tr>
+                        <td>ATM Go Terminals</td>
+                        <td>8,426</td>
+                    </tr>
+                    <tr>
+                        <td>DiskarTech Downloads</td>
+                        <td>5.4 million</td>
+                    </tr>
+                </table>
+                
+                <p>In 2024, RCBC reported that its core businesses grew by 26%, driving a ₱9.5 billion profit, demonstrating strong performance despite challenging economic conditions.</p>
+            </div>
+            <div class="promo-cta">
+                <h3>Source:</h3>
+                <a href="https://www.rcbc.com/company-disclosures" class="btn promo-btn" target="_blank">
+                    <i class="fas fa-gift"></i> Official Website
+                </a>
+            </div> 
+        </div>
+
+        <!-- Awards -->
+        <div id="awards" class="section" style="--i: 9">
+            <div class="section-header">
+                <h1>Awards and Recognitions (Last 5 Years)</h1>
+            </div>
+            <div class="section-content">
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>2024</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="award-title">Philippines' Best Bank for Digital by Asiamoney</div>
+                            <p>Recognized for excellence in digital banking services and innovation (4th consecutive year).</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-primary">Digital Banking</span>
+                            <span class="badge badge-secondary">Innovation</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>2024</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="award-title">Grand Champion for Digital Payments and Financial Inclusion</div>
+                            <p>Acknowledged by the Bankers Institute of the Philippines for leadership in promoting digital payments and financial inclusion initiatives.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-primary">Financial Inclusion</span>
+                            <span class="badge badge-secondary">Digital Payments</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>2024</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="award-title">Eye on Innovation Award by Gartner</div>
+                            <p>Recognized for innovative approaches to banking technology and services.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-info">Technology</span>
+                            <span class="badge badge-secondary">Innovation</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>2023</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="award-title">YouTube Challenger Award</div>
+                            <p>For viral and out-of-the-box digital ad campaigns generating combined views of over 17 million.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-primary">Digital Marketing</span>
+                            <span class="badge badge-info">Social Media</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>2023</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="award-title">Asia Pacific Enterprise's Inspirational Brand Award</div>
+                            <p>Recognized for brand excellence and impact in the financial services industry.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-primary">Brand Excellence</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>2022-2024</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="award-title">Best Retail Bank by Global Banking & Finance Review</div>
+                            <p>Acknowledged for excellence in retail banking services and customer experience (3-peat recognition).</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-success">Retail Banking</span>
+                            <span class="badge badge-secondary">Customer Experience</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="promo-cta">
+                    <h3>Source:</h3>
+                    <a href="https://www.rcbc.com/" class="btn promo-btn" target="_blank">
+                        <i class="fas fa-gift"></i> Official Website
+                    </a>
+                </div> 
+            </div>
+        </div>
+
+        <!-- Organizational Structure -->
+        <div id="org-structure" class="section" style="--i: 10">
+            <h1>Organizational Structure</h1>
+            <p>RCBC follows a structured organizational framework led by the Board of Directors, with various committees and group heads reporting to the President and CEO.</p>
+            <img class="org-chart" src="https://www.rcbc.com/uploads/media/RCBC-Organizational-Chart-2025.png" alt="RCBC Organizational Structure">
+            <p><em>Note: For a full-sized view of the organizational chart, please visit the <a href="https://www.rcbc.com/our-company" target="_blank">official RCBC website</a>.</em></p>
+        </div>
+
+        <!-- Board of Directors -->
+        <div id="board" class="section" style="--i: 9">
+            <h1>Profile of the Board of Directors</h1>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK_R0ZU3CqkBOC86BNgm4lL1xNTYRLpx-btw&s" target="_blank">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK_R0ZU3CqkBOC86BNgm4lL1xNTYRLpx-btw&s" alt="Helen Y. Dee">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">Helen Y. Dee</div>
+                    <div class="profile-position">Chairperson</div>
+                    <p>Helen Y. Dee is the Chairperson of RCBC and has been instrumental in guiding the bank's strategic direction. She is also the Chairperson of the Yuchengco Group of Companies (YGC).</p>
+                </div>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://www.rcbc.com/uploads/media/Cesar-E-A-Virata-Corporate-Vice-Chairman.jpg" target="_blank">
+                        <img src="https://www.rcbc.com/uploads/media/Cesar-E-A-Virata-Corporate-Vice-Chairman.jpg" alt="Cesar E.A. Virata">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">Cesar E.A. Virata</div>
+                    <div class="profile-position">Corporate Vice Chairman</div>
+                    <p>Cesar E.A. Virata is a former Prime Minister of the Philippines and has extensive experience in banking, finance, and governance.</p>
+                </div>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ91VIqJnxjbJvqzeXiCLVmZaQCOx4XENifbQ&s" target="_blank">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ91VIqJnxjbJvqzeXiCLVmZaQCOx4XENifbQ&s" alt="Eugene S. Acevedo">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">Eugene S. Acevedo</div>
+                    <div class="profile-position">President & Chief Executive Officer</div>
+                    <p>Eugene S. Acevedo leads RCBC as President and CEO, driving the bank's digital transformation and innovation initiatives.</p>
+                </div>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://www.rcbc.com/uploads/media/Juan-B-Santos-Independent-Director.jpg" target="_blank">
+                        <img src="https://www.rcbc.com/uploads/media/Juan-B-Santos-Independent-Director.jpg" alt="Juan B. Santos">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">Juan B. Santos</div>
+                    <div class="profile-position">Lead Independent Director</div>
+                    <p>Juan B. Santos brings extensive corporate leadership experience to RCBC's board.</p>
+                </div>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://media.licdn.com/dms/image/v2/D5603AQEpncg3Laxh3g/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1696740469012?e=2147483647&v=beta&t=EoWq1-iH7buI5civbjXi34ZT0kfti8cWmdv3DLtnAQI" target="_blank">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQEpncg3Laxh3g/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1696740469012?e=2147483647&v=beta&t=EoWq1-iH7buI5civbjXi34ZT0kfti8cWmdv3DLtnAQI" alt="John Law">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">John Law</div>
+                    <div class="profile-position">Director</div>
+                    <p>John Law contributes his expertise in financial services and international banking to RCBC's board.</p>
+                </div>
+            </div>
+            
+            <p><em>Note: For complete profiles of all board members, please visit the <a href="https://www.rcbc.com/our-company" target="_blank">official RCBC website</a>.</em></p>
+        </div>
+
+        <!-- Management Committee -->
+        <div id="management" class="section" style="--i: 10">
+            <h1>Profile of Management Committee</h1>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://www.rcbc.com/uploads/media/Eugene-Acevedo_Banking-From-Home_V4_400x560.jpg" target="_blank">
+                        <img src="https://www.rcbc.com/uploads/media/Eugene-Acevedo_Banking-From-Home_V4_400x560.jpg" alt="Eugene S. Acevedo">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">Eugene S. Acevedo</div>
+                    <div class="profile-position">President & Chief Executive Officer</div>
+                    <p>Eugene Acevedo, dubbed as 'The Consummate Banker', was chosen among 'People of the Year 2024' by renowned People Asia. He leads RCBC's overall operations and strategic direction.</p>
+                </div>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://www.rcbc.com/uploads/media/Reginaldo-Cariaso.png" target="_blank">
+                        <img src="https://www.rcbc.com/uploads/media/Reginaldo-Cariaso.png" alt="Reginaldo Anthony B. Cariaso">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">Reginaldo Anthony B. Cariaso</div>
+                    <div class="profile-position">Deputy Chief Executive Officer</div>
+                    <p>Reginaldo Cariaso serves as the Deputy CEO, supporting the President in executing the bank's strategic initiatives.</p>
+                </div>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu1dg7LZ7Oj1WzoBOm6nQAvcNC8fmYeAV_cA&s" target="_blank">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu1dg7LZ7Oj1WzoBOm6nQAvcNC8fmYeAV_cA&s" alt="Elizabeth E. Coronel">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">Elizabeth E. Coronel</div>
+                    <div class="profile-position">Head, Institutional Banking</div>
+                    <p>Elizabeth Coronel leads RCBC's institutional banking services, focusing on corporate clients and large institutions.</p>
+                </div>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://www.rcbc.com/uploads/media/04-Richard-C.jpg" target="_blank">
+                        <img src="https://www.rcbc.com/uploads/media/04-Richard-C.jpg" alt="Richard C. Lim">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">Richard C. Lim</div>
+                    <div class="profile-position">Head, Retail Banking</div>
+                    <p>Richard Lim oversees RCBC's retail banking operations, including branch network, consumer products, and digital channels.</p>
+                </div>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://www.rcbc.com/uploads/media/12-Alberto-Magno-N.jpg" target="_blank">
+                        <img src="https://www.rcbc.com/uploads/media/12-Alberto-Magno-N.jpg" alt="Alberto Magno N. Pedrosa">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">Alberto Magno N. Pedrosa</div>
+                    <div class="profile-position">Head, Treasury</div>
+                    <p>Alberto Pedrosa manages RCBC's treasury operations, including liquidity management and investment portfolio.</p>
+                </div>
+            </div>
+            
+            <p><em>Note: For complete profiles of all management committee members, please visit the <a href="https://www.rcbc.com/our-company" target="_blank">official RCBC website</a>.</em></p>
+        </div>
+
+        <!-- Capital Structure -->
+        <div id="capital-structure" class="section" style="--i: 11">
+            <h1>Capital Structure and Adequacy</h1>
+            
+            <h3>Major Shareholders (as of 2023)</h3>
+            <ul>
+                <li>Yuchengco Group of Companies (YGC) - Majority shareholder</li>
+                <li>Cathay Life Insurance Co., Ltd. - Strategic investor</li>
+                <li>International Finance Corporation (IFC) - Strategic investor</li>
+                <li>Sumitomo Mitsui Banking Corporation (SMBC) - Strategic investor</li>
+            </ul>
+            
+            <h3>Capital Adequacy</h3>
+            <p>RCBC maintains capital adequacy ratios above the regulatory requirements set by the Bangko Sentral ng Pilipinas (BSP) and Basel III standards, ensuring a strong capital base to support its operations and growth.</p>
+            
+            <p>For detailed information on RCBC's shareholding structure and public ownership, please refer to the <a href="https://www.rcbc.com/our-company" target="_blank">official RCBC website</a> under the "Shareholding Structure" section.</p>
+        </div>
+
+        <!-- Corporate Governance -->
+        <div id="corporate-governance" class="section" style="--i: 12">
+            <h1>Corporate Governance</h1>
+            <p>RCBC is committed to upholding the highest standards of corporate governance in accordance with regulatory requirements and international best practices. The bank's corporate governance framework ensures transparency, accountability, and fairness in all its dealings.</p>
+            
+            <p>For detailed information on RCBC's corporate governance policies, practices, and reports, please visit:</p>
+            <p><a href="https://www.rcbc.com/corporate-governance" target="_blank">RCBC Corporate Governance</a></p>
+            
+            <h3>Key Corporate Governance Elements</h3>
+            <ul>
+                <li>Board of Directors governance policies and procedures</li>
+                <li>Risk management framework</li>
+                <li>Compliance with regulatory requirements</li>
+                <li>Transparency and disclosure practices</li>
+                <li>Stakeholder relations</li>
+                <li>Corporate governance committee structure</li>
+            </ul>
+        </div>
+
+        <!-- CSR -->
+        <div id="csr" class="section" style="--i: 13">
+            <div class="section-header">
+                <h1>Corporate Social Responsibility (CSR)</h1>
+            </div>
+            <div class="section-content">
+                <p>RCBC is committed to contributing to social development and sustainability through various corporate social responsibility initiatives:</p>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Sustainable Finance</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>RCBC is a pioneer in sustainable finance in the Philippines, having issued the country's first green bond under the ASEAN Green Bond Standards. The bank raised ₱15 billion through this initiative to finance environmental and climate-friendly projects.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-success">Environmental</span>
+                            <span class="badge badge-info">Sustainable Finance</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Financial Inclusion</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Through its DiskarTech app, RCBC reaches unbanked and underbanked Filipinos, providing accessible financial services to those in remote areas and grassroots communities. The app has recorded over 5.4 million downloads, reflecting its impact on financial inclusion.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-primary">Financial Inclusion</span>
+                            <span class="badge badge-secondary">Digital Banking</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Barangayan Banking</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>RCBC's ATM Go program brings banking services to far-flung communities through portable ATM terminals, with 8,426 terminals deployed across all 82 provinces in the Philippines. This initiative helps government beneficiaries access financial aid and services without traveling to urban centers.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-primary">Financial Inclusion</span>
+                            <span class="badge badge-success">Community Development</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Environmental Sustainability</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>RCBC has implemented policies to reduce its environmental footprint, including energy-efficient practices in its offices and branches. The bank also promotes paperless banking through its digital channels to conserve resources.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge badge-success">Environmental</span>
+                            <span class="badge badge-info">Sustainability</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="promo-cta">
+                    <h3>Source:</h3>
+                    <a href="https://www.rcbc.com/sustainability" class="btn promo-btn" target="_blank">
+                        <i class="fas fa-gift"></i> Official Website
+                    </a>
+                </div> 
+            </div>
+        </div>
+
+        <!-- Financial Statements -->
+        <div id="financial-statements" class="section" style="--i: 14">
+            <h1>Financial Statement Reports (Three Consecutive Years)</h1>
+            
+            <h3>2023 Financial Highlights</h3>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Net Income</td>
+                    <td>₱12.22 billion (↑1.1%)</td>
+                </tr>
+                <tr>
+                    <td>Return on Equity (ROE)</td>
+                    <td>9.5%</td>
+                </tr>
+                <tr>
+                    <td>Return on Assets (ROA)</td>
+                    <td>1.1%</td>
+                </tr>
+                <tr>
+                    <td>Net Interest Income</td>
+                    <td>₱33.57 billion (↑7.6%)</td>
+                </tr>
+                <tr>
+                    <td>Total Assets</td>
+                    <td>₱1.24 trillion (↑7.2%)</td>
+                </tr>
+                <tr>
+                    <td>Gross Loans</td>
+                    <td>₱622 billion (↑15.2%)</td>
+                </tr>
+                <tr>
+                    <td>Total Deposits</td>
+                    <td>₱957 billion (↑11.6%)</td>
+                </tr>
+                <tr>
+                    <td>NPL Ratio</td>
+                    <td>3.34%</td>
+                </tr>
+                <tr>
+                    <td>CET1 Ratio</td>
+                    <td>14.69%</td>
+                </tr>
+                <tr>
+                    <td>Capital Adequacy Ratio</td>
+                    <td>17.37%</td>
+                </tr>
+                <tr>
+                    <td>Branch Network</td>
+                    <td>458 branches, 1,460 ATMs, 5,779 ATM Go terminals</td>
+                </tr>
+            </table>
+            
+            <h4>Key Developments in 2023</h4>
+            <ul>
+                <li><strong>Record Profit:</strong> RCBC achieved a net income of ₱12.22 billion, marking a 1.1% increase from the previous year.</li>
+                <li><strong>Loan Growth:</strong> Gross loans expanded by 15.2% to ₱622 billion, with consumer loans comprising 29% of the portfolio.</li>
+                <li><strong>Asset Quality:</strong> Maintained a non-performing loan (NPL) ratio of 3.34%, an improvement from 3.75% in 2022.</li>
+                <li><strong>Digital Transformation:</strong> Invested significantly in AI and data science to enhance digital banking capabilities.</li>
+                <li><strong>Recognition:</strong> Received multiple awards, including "Best Bank for Digital" from AsiaMoney and "Digital Bank of the Year" from The Asset.</li>
+            </ul>
+            
+            <h3>2022 Financial Highlights</h3>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Net Income</td>
+                    <td>₱12.1 billion (↑71%)</td>
+                </tr>
+                <tr>
+                    <td>Return on Equity (ROE)</td>
+                    <td>10.2%</td>
+                </tr>
+                <tr>
+                    <td>Return on Assets (ROA)</td>
+                    <td>1.0%</td>
+                </tr>
+                <tr>
+                    <td>Net Interest Income</td>
+                    <td>₱31.22 billion (↑10%)</td>
+                </tr>
+                <tr>
+                    <td>Total Assets</td>
+                    <td>₱1.15 trillion (↑8%)</td>
+                </tr>
+                <tr>
+                    <td>Gross Loans</td>
+                    <td>₱540 billion (↑12%)</td>
+                </tr>
+                <tr>
+                    <td>Total Deposits</td>
+                    <td>₱857 billion (↑27%)</td>
+                </tr>
+                <tr>
+                    <td>NPL Ratio</td>
+                    <td>3.75%</td>
+                </tr>
+                <tr>
+                    <td>CET1 Ratio</td>
+                    <td>12.33%</td>
+                </tr>
+                <tr>
+                    <td>Capital Adequacy Ratio</td>
+                    <td>15.29%</td>
+                </tr>
+                <tr>
+                    <td>Branch Network</td>
+                    <td>462 branches, 1,352 ATMs, 1,559 ATM Go terminals</td>
+                </tr>
+            </table>
+            
+            <h4>Key Developments in 2022</h4>
+            <ul>
+                <li><strong>Sustained Growth:</strong> Net income rose to ₱12.1 billion, a 71% increase year-over-year.</li>
+                <li><strong>Operational Efficiency:</strong> Improved cost-to-income ratio through prudent expense management.</li>
+                <li><strong>Capital Strength:</strong> Common Equity Tier 1 ratio stood at 12.33%, and Capital Adequacy Ratio at 15.29%, both above regulatory requirements.</li>
+            </ul>
+            
+            <h3>2021 Financial Highlights</h3>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Net Income</td>
+                    <td>₱7.1 billion</td>
+                </tr>
+                <tr>
+                    <td>Return on Equity (ROE)</td>
+                    <td>8.5%</td>
+                </tr>
+                <tr>
+                    <td>Return on Assets (ROA)</td>
+                    <td>0.9%</td>
+                </tr>
+                <tr>
+                    <td>Net Interest Income</td>
+                    <td>₱28.4 billion</td>
+                </tr>
+                <tr>
+                    <td>Total Assets</td>
+                    <td>₱1.06 trillion</td>
+                </tr>
+                <tr>
+                    <td>Gross Loans</td>
+                    <td>₱482 billion</td>
+                </tr>
+                <tr>
+                    <td>Total Deposits</td>
+                    <td>₱675 billion</td>
+                </tr>
+                <tr>
+                    <td>NPL Ratio</td>
+                    <td>4.1%</td>
+                </tr>
+                <tr>
+                    <td>CET1 Ratio</td>
+                    <td>11.5%</td>
+                </tr>
+                <tr>
+                    <td>Capital Adequacy Ratio</td>
+                    <td>14.8%</td>
+                </tr>
+                <tr>
+                    <td>Branch Network</td>
+                    <td>460 branches, 1,300 ATMs, 1,500 ATM Go terminals</td>
+                </tr>
+            </table>
+            
+            <h4>Key Developments in 2021</h4>
+            <ul>
+                <li><strong>Earnings Recovery:</strong> Net income reached ₱7.1 billion, up from ₱5.0 billion in 2020.</li>
+                <li><strong>Digital Advancements:</strong> Launched new digital platforms to enhance customer experience.</li>
+                <li><strong>Cultural Initiatives:</strong> Focused on sustainable development and financial inclusion.</li>
+                <li><strong>Accolades:</strong> Recognized for excellence in digital banking and customer service.</li>
+            </ul>
+            
+            <h3>Annual Reports</h3>
+            <p>For comprehensive details, you can access RCBC's official annual reports:</p>
+            <ul>
+                <li><a href="https://www.rcbc.com/uploads/media/RCBC-Annual-Report-2023-FA-Digital.pdf" target="_blank">2023 Annual Report</a></li>
+                <li><a href="https://www.rcbc.com/uploads/media/RCBC-2022-Annual-Report.pdf" target="_blank">2022 Annual Report</a></li>
+                <li><a href="https://www.rcbc.com/uploads/media/RCBC-2021-Annual-and-Sustainability-Report-V4.pdf" target="_blank">2021 Annual Report</a></li>
+            </ul>
+        </div>
+
+        <!-- Team -->
+        <div id="team" class="section" style="--i: 11">
+            <h1>Our Team</h1>
+            <p>Meet our dedicated team member who work behind the scenes to deliver exceptional Eprofile Website.</p>
+            
+            <div class="profile-card">
+                <div class="profile-image">
+                    <a href="https://scontent.fcgy2-3.fna.fbcdn.net/v/t39.30808-6/481204193_956618109908982_5672711320851693168_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=f727a1&_nc_eui2=AeH5TqmkVtzfI7S9KlAWU0B3dsygDG6pjJd2zKAMbqmMl6Smz1BIXCm1LSkSPAmqPQ9AaTj2ZrlC_vqnR9lWSsyQ&_nc_ohc=iopuDWS92BsQ7kNvwHCHb1y&_nc_oc=AdnHVA8iVDtkUk3L0CCBoyVoUh70lDGghVTRw07wyhha-pFcbh9tTuGsPOWCre6UJs4&_nc_zt=23&_nc_ht=scontent.fcgy2-3.fna&_nc_gid=6iAIBeo1w8Jy01XOn5HaLg&oh=00_AfE_ZtNFZlYVTkiGCYiqmBrFD-QKndniIqfZL6Ek556EeQ&oe=68102493" target="_blank">
+                        <img src="https://scontent.fcgy2-1.fna.fbcdn.net/v/t39.30808-6/492519874_1003140981923361_8020657543576089442_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeGauBFud3Qy3qGB-YN7ayk_KhE1OJzNzgMqETU4nM3OA8m2_CH8_h8M3uygqFPWCrKMKEC9Sy-QSIktoxFZggkY&_nc_ohc=WF5iBrR5bh8Q7kNvwFYAop9&_nc_oc=Adlgn-TZzXLfjqpT6dxBjOHZQxKZtJ9XWRTGipPdKffcZbsNU0aRwLzNQo0mgdNlaRY&_nc_zt=23&_nc_ht=scontent.fcgy2-1.fna&_nc_gid=wPJN5IubZMU4JhXDDpbNEA&oh=00_AfHuT-AclS9QeARqKnD807WumdPyfNuAl33ewTsxa_M2yA&oe=681A7832" alt="Saison Consaran">
+                    </a>
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">SAISON M. CONSARAN</div>
+                    <div class="profile-position">BSBA STUDENT</div>
+                </div>
+            </div>
+            
+            <!-- <div class="profile-card">
+                <div class="profile-image">
+                    <img src="https://scontent.fcgy2-3.fna.fbcdn.net/v/t39.30808-1/492075300_600627326325356_5464072874596057925_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=106&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeG4s1zrU-5Hu-Uaaj2Smdx55ABpwgDYX67kAGnCANhfrj77m5OQA4PwFS-3SXmTTPCjtWrJuu4hacb6X49R7t1F&_nc_ohc=nX50mpl8uA0Q7kNvwGqmoZD&_nc_oc=Adkf7UPs7-_-rL5pSKFvyrENfys64vQch9hI53GdHeat7CFoqoyjj0am3pOW5adpwyY&_nc_zt=24&_nc_ht=scontent.fcgy2-3.fna&_nc_gid=1Itdbx-n_axa1y2miETaBA&oh=00_AfH5xdxlvGNg0h9B1tAfe91saUrEgq8a2lA7idSBQpPtpg&oe=680C2F83" alt="Juan Reyes">
+                </div>
+                <div class="profile-details">
+                    <div class="profile-name">Rosalyn Dangop</div>
+                    <div class="profile-position">BSBA STUDENT</div>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- References -->
+        <div id="references" class="section" style="--i: 15">
+            <h1>References</h1>
+            <p>The information on this website has been compiled from the following sources:</p>
+            
+            <ol>
+                <li>RCBC Official Website: <a href="https://www.rcbc.com" target="_blank">https://www.rcbc.com</a></li>
+                <li>RCBC Corporate Profile: <a href="https://www.rcbc.com/our-company" target="_blank">https://www.rcbc.com/our-company</a></li>
+                <li>RCBC Annual Reports (2021-2023): <a href="https://www.rcbc.com/investor-relations" target="_blank">https://www.rcbc.com/investor-relations</a></li>
+                <li>Philippine Stock Exchange (PSE) Edge: <a href="https://edge.pse.com.ph/companyInformation/form.do?cmpy_id=232" target="_blank">RCBC Company Information</a></li>
+                <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Rizal_Commercial_Banking_Corporation" target="_blank">Rizal Commercial Banking Corporation</a></li>
+                <li>Compliance Advisor Ombudsman (CAO): <a href="http://www.cao-ombudsman.org/cases/philippines-rizal-commercial-banking-corporation-rcbc-01" target="_blank">Philippines: Rizal Commercial Banking Corporation (RCBC)</a></li>
+            </ol>
+            
+            <p>All company logos, trademarks, and brand names are property of their respective owners. All company, product, and service names used in this website are for identification purposes only.</p>
+        </div>
+        
+        <!-- Disclaimer -->
+        <div id="disclaimer" class="section" style="--i: 16">
+            <h1>Disclaimer</h1>
+            <p>This website was created for educational purposes only. It is not an official RCBC website and is not affiliated with, endorsed by, or sponsored by Rizal Commercial Banking Corporation or any of its subsidiaries or affiliates.</p>
+            
+            <p>The information provided on this website is based on publicly available data and is intended for informational and educational purposes only. While we have made efforts to ensure the accuracy of the information, we cannot guarantee that it is complete, up-to-date, or error-free.</p>
+            
+            <p>This website should not be used for making financial or investment decisions. For official information about RCBC's products, services, or financial reports, please visit the official RCBC website at <a href="https://www.rcbc.com" target="_blank">https://www.rcbc.com</a>.</p>
+            
+            <p>For any concerns or clarifications regarding the content of this educational website, please contact the website administrator.</p>
+        </div>
+    </div>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript for animations and interactions -->
+    <script>
+        // Hide all sections except company-name initially
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            
+            // Add animation delay based on section order
+            sections.forEach((section, index) => {
+                section.style.setProperty('--i', index + 1);
+                
+                // Hide all sections except the company overview initially
+                if (section.id !== 'company-name') {
+                    section.style.display = 'none';
+                }
+            });
+            
+            // Add click event listeners to sidebar menu items
+            const menuItems = document.querySelectorAll('.menu a');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the target section id from the href attribute
+                    const targetId = this.getAttribute('href').substring(1);
+                    
+                    // Hide all sections
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // Show only the target section
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.style.display = 'block';
+                        
+                        // Scroll to top of content
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+        
+        // Scroll to top functionality
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html> 
